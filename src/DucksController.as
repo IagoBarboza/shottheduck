@@ -3,105 +3,95 @@ package {
 
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+
 	/**
-	 * @author Ibs
+	 * Controlador dos patos.
+	 * O construtor DucksController recebe uma referência de DucksView.
+	 * O método onAnimation é responsável pelo movimento horizontal dos patos.
+	 * O método showDuck é responsável por pegar um pato aleatório de view.ducksArray e movimentá-lo na vertical.
+	 * O método hideDuck trata de descer um pato quando acertado e colocar outro no lugar dele chamando showDuck.
+	 * O método randomNumber trata de escolher um número aleatório de 0 - 7, para escolha do pato no view.ducksArray.
+	 * O método setCurrentIndex trata de modificar o currentIndex para impedir que o mesmo pato seja adicionado por 
+	 * showDuck.
 	 */
 	public class DucksController extends Object {
-		
 		public var view : DucksView;
 		private var currentIndex : int;
-		
-		public function DucksController(view: DucksView) {
-			
+		private const DUCKSARRAYLOWINDEX : int = 0;
+		private const DUCKSARRAYHIGHINDEX : int = 7;
+
+		public function DucksController(view : DucksView) {
 			this.view = view;
 			showDuck();
 		}
-		
-		public function onAnimation():void{
-			if(view.x>-1380){
-				view.x = view.x -7;	
-			}else{
+
+		public function onAnimation() : void {
+			if (view.x > -1380) {
+				view.x = view.x - 7;
+			} else {
 				view.x = 1280;
 			}
-			
 		}
-		
-		public function showDuck() : void{
-			var i:int;
-			i = randomNumber(0,7);
+
+		public function showDuck() : void {
+			var i : int;
+			i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
 			trace("---------------------------------");
-			trace("i:" +i);
+			trace("i:" + i);
 			trace("Current Index:", +currentIndex);
-			
-			
-			while(i == currentIndex){
-				i = randomNumber(0,7);
+
+			while (i == currentIndex) {
+				i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
 				trace("sort again!");
 			}
-			
-			trace("new i: "+i);
+
+			trace("new i: " + i);
 			trace("--------------------------------");
-			if(i != currentIndex)
+			if (i != currentIndex)
 				TweenLite.to(view.ducksArray[i], 1, {y:-150});
-			
 		}
-		
-		public function hideDuck(e:MouseEvent) : void{
+
+		public function hideDuck(e : MouseEvent) : void {
 			TweenLite.to(e.currentTarget, 1, {y:0, onComplete:showDuck});
 			setCurrentIndex(e);
 		}
-		
-		public function setEventListeners(duck : MovieClip) : void{
+
+		public function setEventListeners(duck : MovieClip) : void {
 			duck.addEventListener(MouseEvent.CLICK, hideDuck);
 		}
-		
+
 		public function randomNumber(low : Number = 0, high : Number = 1) : Number {
 			return Math.floor(Math.random() * (1 + high - low)) + low;
 		}
-		
-		public function setCurrentIndex(e:MouseEvent):void{
-			
-			switch(e.currentTarget.name){
-				
+
+		public function setCurrentIndex(e : MouseEvent) : void {
+			// Iago, esse WARNING é normal?
+			switch(e.currentTarget.name) {
 				case 'duck1':
 					currentIndex = 0;
-				break;
-				
+					break;
 				case 'duck2':
 					currentIndex = 1;
-				break;
-				
+					break;
 				case 'duck3':
 					currentIndex = 2;
-				break;
-				
+					break;
 				case 'duck4':
 					currentIndex = 3;
-				break;
-				
+					break;
 				case 'duck5':
 					currentIndex = 4;
-				break;
-				
+					break;
 				case 'duck6':
 					currentIndex = 5;
-				break;
-				
+					break;
 				case 'duck7':
 					currentIndex = 6;
-				break;
-				
+					break;
 				case 'duck8':
-				currentIndex = 7;
-				break;
-				
-				
-				
-				
-				
+					currentIndex = 7;
+					break;
 			}
-			
 		}
-		
 	}
 }

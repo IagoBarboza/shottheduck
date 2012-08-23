@@ -2,10 +2,9 @@ package {
 	import flash.display.MovieClip;
 
 	/**
-	 * @author Ibs
+	 * View que será controlada por DucksController.
 	 */
 	public class DucksView extends MovieClip {
-		
 		public var duck1 : MovieClip;
 		public var duck2 : MovieClip;
 		public var duck3 : MovieClip;
@@ -14,19 +13,14 @@ package {
 		public var duck6 : MovieClip;
 		public var duck7 : MovieClip;
 		public var duck8 : MovieClip;
-		
 		public var ducksArray : Array = new Array(MovieClip);
-		
-		
-		
 		private var ducksController : DucksController;
-		
+
 		public function DucksView() {
-			
 			loadDucksArray();
-			
-			ducksController = new DucksController(this);		
-			
+
+			ducksController = new DucksController(this);
+
 			setEventListeners(duck1);
 			setEventListeners(duck2);
 			setEventListeners(duck3);
@@ -35,11 +29,9 @@ package {
 			setEventListeners(duck6);
 			setEventListeners(duck7);
 			setEventListeners(duck8);
-			
 		}
 
 		private function loadDucksArray() : void {
-			
 			ducksArray[0] = duck1;
 			ducksArray[1] = duck2;
 			ducksArray[2] = duck3;
@@ -49,14 +41,14 @@ package {
 			ducksArray[6] = duck7;
 			ducksArray[7] = duck8;
 		}
-		
-		public function onAnimation():void{
+
+		public function onAnimation() : void {
 			ducksController.onAnimation();
 		}
-		
-		public function setEventListeners(duck : MovieClip) : void{ // adciona os event listeners de MouseClick dos patos
+
+		public function setEventListeners(duck : MovieClip) : void {
+			// adciona os event listeners de MouseClick dos patos
 			ducksController.setEventListeners(duck);
 		}
-		
 	}
 }

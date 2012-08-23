@@ -2,10 +2,10 @@ package {
 	import flash.display.MovieClip;
 
 	/**
-	 * @author Ibs
+	 * View controlada por WavesController.
+	 * Possui 3 DucksView.
 	 */
 	public class WavesView extends MovieClip {
-		
 		public var wave1 : MovieClip;
 		public var wave2 : MovieClip;
 		public var wave3 : MovieClip;
@@ -13,31 +13,29 @@ package {
 		public var ducksView2 : DucksView;
 		public var ducksView3 : DucksView;
 		private var wavesController : WavesController;
-		
+
 		public function WavesView() {
-		
 			wavesController = new WavesController();
 			wavesController.getView(this);
 		}
-		
-		public function onWavesAnimation():void{
+
+		public function onWavesAnimation() : void {
 			wavesController.onWavesAnimation();
 		}
-		
-		public function offWavesAnimation():void{
+
+		public function offWavesAnimation() : void {
 			wavesController.offWavesAnimation();
 		}
-		
-		public function onDucksAnimation() : void{
+
+		public function onDucksAnimation() : void {
 			wavesController.onDucksAnimation();
 		}
-				
-//		public function showDuck() : void{
-//			wavesController.showDuck();		
-//		}
-//		
-//		public function hideDuck() : void{
-//			wavesController.hideDuck();	
-//		}
+		// public function showDuck() : void{
+		// wavesController.showDuck();		
+		// }
+		//		
+	// public function hideDuck() : void{
+	// wavesController.hideDuck();	
+	// }
 	}
 }
