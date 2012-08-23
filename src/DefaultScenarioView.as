@@ -1,5 +1,6 @@
-package {
+﻿package {
 	import fl.controls.Button;
+	import flash.media.Sound;
 
 	import flash.display.MovieClip;
 
@@ -25,6 +26,9 @@ package {
 
 		private function startGame() : void {
 			defaultScenarioController.startGame();
+            var mySound:SuperCircus = new SuperCircus();
+            mySound.play();
+          
 		}
 	}
 }
