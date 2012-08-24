@@ -15,17 +15,20 @@ package {
 	 * showDuck.
 	 */
 	public class DucksController extends Object {
+		
 		public var view : DucksView;
 		private var currentIndex : int;
 		private const DUCKSARRAYLOWINDEX : int = 0;
 		private const DUCKSARRAYHIGHINDEX : int = 7;
 
 		public function DucksController(view : DucksView) {
+			
 			this.view = view;
 			showDuck();
 		}
 
 		public function onAnimation() : void {
+			
 			if (view.x > -1380) {
 				view.x = view.x - 7;
 			} else {
@@ -34,24 +37,21 @@ package {
 		}
 
 		public function showDuck() : void {
+			
 			var i : int;
+			
 			i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
-			trace("---------------------------------");
-			trace("i:" + i);
-			trace("Current Index:", +currentIndex);
 
 			while (i == currentIndex) {
 				i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
 				trace("sort again!");
 			}
-
-			trace("new i: " + i);
-			trace("--------------------------------");
 			if (i != currentIndex)
 				TweenLite.to(view.ducksArray[i], 1, {y:-150});
 		}
 
 		public function hideDuck(e : MouseEvent) : void {
+			
 			TweenLite.to(e.currentTarget, 1, {y:0, onComplete:showDuck});
 			setCurrentIndex(e);
 		}
@@ -66,6 +66,8 @@ package {
 
 		public function setCurrentIndex(e : MouseEvent) : void {
 			// Iago, esse WARNING é normal?
+			// É sim thiago. Pq o currentTarget retorna um Object. Object n tem um "nome", mas como agente sabe 
+			// que o objeto referente ao evento é um movieClip, agente chama o metodo .name
 			switch(e.currentTarget.name) {
 				case 'duck1':
 					currentIndex = 0;

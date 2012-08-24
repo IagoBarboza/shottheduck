@@ -32,11 +32,12 @@ package {
 		}
 
 		public function offWavesAnimation() : void {
-			if (animate == true) animate = false;
-			else {
-				animate = true;
-				this.onWavesAnimation();
-			}
+			//if (animate == true) animate = false;
+			//else {
+			//	animate = true;
+				//this.onWavesAnimation();
+				animate = false;
+			//}
 		}
 
 		public function onDucksAnimation() : void {

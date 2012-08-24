@@ -1,22 +1,19 @@
 ﻿package {
-	import flash.text.TextField;
-	import fl.controls.Button;
-
 	import flash.display.MovieClip;
-	
-	import flash.sensors.Accelerometer;
-	import flash.events.AccelerometerEvent;
+	import flash.text.TextField;
 
 	/**
 	 * View controlada por DefaultScenarioController.
 	 */
 	public class DefaultScenarioView extends MovieClip {
+		
 		private var defaultScenarioController : DefaultScenarioController;
 		public var wavesView : WavesView;
-		public var pauseButton : Button;
+		public var pauseButton : MovieClip;
 		public var crn : ChronometerView;
 		public var ammu : Ammunition;
 		public var label : TextField;
+		public var pauseMenuView : PauseMenuView = new PauseMenuView();
 		
 
 		public function DefaultScenarioView() {
@@ -28,10 +25,9 @@
 			startGame();
 		}
 
-		private function setEventListeners(button : Button) : void {
+		private function setEventListeners(mc : MovieClip) : void {
 			
-			defaultScenarioController.setEventListeners(button);
-			
+			defaultScenarioController.setEventListeners(mc);
 		}
 
 		private function startGame() : void {
