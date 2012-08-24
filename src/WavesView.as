@@ -30,12 +30,9 @@ package {
 		public function onDucksAnimation() : void {
 			wavesController.onDucksAnimation();
 		}
-		// public function showDuck() : void{
-		// wavesController.showDuck();		
-		// }
-		//		
-	// public function hideDuck() : void{
-	// wavesController.hideDuck();	
-	// }
+		
+		public function ducksShooted() : int{
+			return wavesController.ducksShooted();
+		}
 	}
 }

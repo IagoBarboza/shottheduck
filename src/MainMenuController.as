@@ -1,4 +1,5 @@
 package {
+	import flash.events.Event;
 	import com.greensock.TweenLite;
 
 	import flash.display.MovieClip;
@@ -12,11 +13,12 @@ package {
 	public class MainMenuController extends Object {
 		private var view : MainMenuView;
 		private var defaultScenarioView : DefaultScenarioView;
+		var e:Event;
 
 		public function MainMenuController(view : MainMenuView) {
 			
 			this.view = view;
-			inButtonAnimation();
+			inButtonAnimation(e);
 		}
 
 		public function setEventListener(button : MovieClip) : void {
@@ -28,7 +30,7 @@ package {
 			}
 		}
 
-		private function inButtonAnimation() : void {
+		private function inButtonAnimation(e:Event) : void {
 			
 			TweenLite.to(view.newGameButton, 2, {y:-74});
 			TweenLite.to(view.recordsButton, 2, {y:110});
@@ -43,6 +45,7 @@ package {
 		private function onDefaulScenarioView() : void {
 			defaultScenarioView = new DefaultScenarioView();
 			view.addChild(defaultScenarioView);
+			defaultScenarioView.addEventListener("onMainMenu", inButtonAnimation);
 		}
 
 		// Iago, precisaremos desse método? Vamos ver amanhã.

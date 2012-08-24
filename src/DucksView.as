@@ -43,12 +43,17 @@ package {
 		}
 
 		public function onAnimation() : void {
+			ducksController.onUpdate();
 			ducksController.onAnimation();
 		}
 
 		public function setEventListeners(duck : MovieClip) : void {
 			// adciona os event listeners de MouseClick dos patos
 			ducksController.setEventListeners(duck);
+		}
+		
+		public function ducksShooted () : int{
+			return ducksController.ducksShooted();
 		}
 	}
 }

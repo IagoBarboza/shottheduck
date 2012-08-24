@@ -32,18 +32,18 @@ package {
 		}
 
 		public function offWavesAnimation() : void {
-			//if (animate == true) animate = false;
-			//else {
-			//	animate = true;
-				//this.onWavesAnimation();
-				animate = false;
-			//}
+			animate = false;
 		}
 
 		public function onDucksAnimation() : void {
 			view.ducksView1.onAnimation();
 			view.ducksView2.onAnimation();
 			view.ducksView3.onAnimation();
+		}
+		
+		public function ducksShooted() : int{
+			return view.ducksView1.ducksShooted()+view.ducksView2.ducksShooted()+view.ducksView3.ducksShooted();
+			
 		}
 	}
 }

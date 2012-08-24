@@ -15,45 +15,45 @@ package {
 	 * showDuck.
 	 */
 	public class DucksController extends Object {
-		
 		public var view : DucksView;
 		private var currentIndex : int;
 		private const DUCKSARRAYLOWINDEX : int = 0;
 		private const DUCKSARRAYHIGHINDEX : int = 7;
+		private var update : Boolean;
+		private var ducksShootedAux : int=0;
 
 		public function DucksController(view : DucksView) {
-			
 			this.view = view;
 			showDuck();
 		}
 
 		public function onAnimation() : void {
-			
-			if (view.x > -1380) {
-				view.x = view.x - 7;
-			} else {
-				view.x = 1280;
+			if (update) {
+				if (view.x > -1380) {
+					view.x = view.x - 7;
+				} else {
+					view.x = 1280;
+				}
 			}
 		}
 
 		public function showDuck() : void {
-			
 			var i : int;
-			
+
 			i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
 
 			while (i == currentIndex) {
 				i = randomNumber(DUCKSARRAYLOWINDEX, DUCKSARRAYHIGHINDEX);
-				trace("sort again!");
 			}
 			if (i != currentIndex)
 				TweenLite.to(view.ducksArray[i], 1, {y:-150});
 		}
 
 		public function hideDuck(e : MouseEvent) : void {
-			
 			TweenLite.to(e.currentTarget, 1, {y:0, onComplete:showDuck});
 			setCurrentIndex(e);
+			ducksShootedAux++;
+			
 		}
 
 		public function setEventListeners(duck : MovieClip) : void {
@@ -64,10 +64,15 @@ package {
 			return Math.floor(Math.random() * (1 + high - low)) + low;
 		}
 
+		public function onUpdate() : void {
+			update = true;
+		}
+		
+		public function ducksShooted():int{
+			return ducksShootedAux;
+		}
+
 		public function setCurrentIndex(e : MouseEvent) : void {
-			// Iago, esse WARNING é normal?
-			// É sim thiago. Pq o currentTarget retorna um Object. Object n tem um "nome", mas como agente sabe 
-			// que o objeto referente ao evento é um movieClip, agente chama o metodo .name
 			switch(e.currentTarget.name) {
 				case 'duck1':
 					currentIndex = 0;
