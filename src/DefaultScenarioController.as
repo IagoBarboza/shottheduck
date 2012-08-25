@@ -1,28 +1,42 @@
 package {
+	import com.greensock.TweenLite;
 	import flash.display.MovieClip;
 	import flash.events.AccelerometerEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.sensors.Accelerometer;
 	import flash.utils.getTimer;
-
 	/**
-	 * Controlador do DefaultScenarioView.
-	 * O método getView é necessário para obter a referência da View.
-	 * O método startGame() chama startUpdate() que é o método responsável pelo início das animações.
+	 * @author Ibs
 	 */
-	
 	public class DefaultScenarioController extends Object {
+		
 		public var view : DefaultScenarioView;
 		public var acc : Accelerometer = new Accelerometer();
 		var lastShake : Number = 0;
 		var shakeWait : Number = 500;
-
-		public function DefaultScenarioController() {
+		
+		public function DefaultScenarioController(view : DefaultScenarioView) {
+			this.view = view;
 		}
 
-		public function getView(view : DefaultScenarioView) : void {
-			this.view = view;
+		public function setEventListener(mc : MovieClip) : void {
+			
+			// listeners dos eventos do pause menu
+			view.pauseMenuView.addEventListener("onPlayButton",unPauseGame);
+			view.pauseMenuView.addEventListener("onExitButton", onMainMenu);
+
+			// listener dos eventos de click no stage
+			view.addEventListener(MouseEvent.CLICK, onShoot);
+
+			// listener do acelerometro(reload)
+			acc.addEventListener(AccelerometerEvent.UPDATE, onAccUpdate);
+
+			switch(mc.name) {
+				case 'pauseButton':
+					view.pauseButton.addEventListener(MouseEvent.CLICK, pauseGame);
+					break;
+			}
 		}
 
 		public function startGame() : void {
@@ -35,26 +49,7 @@ package {
 			// ativa a animação da camada dos patos
 			view.addEventListener(Event.ENTER_FRAME, onDucksAnimation);
 		}
-
-		public function setEventListeners(button : MovieClip) : void {
-			
-			// listeners dos eventos do pause menu
-			view.pauseMenuView.addEventListener("onPlayButton",unPauseGame);
-			view.pauseMenuView.addEventListener("onExitButton", onMainMenu);
-
-			// listener dos eventos de click no stage
-			view.addEventListener(MouseEvent.CLICK, onShoot);
-
-			// listener do acelerometro(reload)
-			acc.addEventListener(AccelerometerEvent.UPDATE, onAccUpdate);
-
-			switch(button.name) {
-				case 'pauseButton':
-					view.pauseButton.addEventListener(MouseEvent.CLICK, pauseGame);
-					break;
-			}
-		}
-
+		
 		function onAccUpdate(e : AccelerometerEvent) : void // listener do acelerometro
  		{
 			// analisa se houve shake
@@ -80,7 +75,7 @@ package {
 
 			// analisa se o pause menu já n levou um visible false
 			if (view.pauseMenuView.visible == false) view.pauseMenuView.visible = true;
-
+			
 			// adciona o pause menu
 			view.addChild(view.pauseMenuView);
 
@@ -178,6 +173,15 @@ package {
 			view.addEventListener(MouseEvent.CLICK, onShoot);
 			view.wavesView.reloadEventListeners();
 			view.ammuView.reload();
+		}
+
+		public function showFinalScoreView() : void {
+			view.addChild(view.finalScoreView);
+			TweenLite.to(view.finalScoreView, 2, {y:-25});
+		}
+		
+		public function hideFinalScoreView() : void {
+			TweenLite.to(view.finalScoreView, 2, {y:-575});
 		}
 	}
 }

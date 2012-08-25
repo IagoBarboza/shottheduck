@@ -1,38 +1,45 @@
-﻿package {
+package {
 	import flash.display.MovieClip;
-	import flash.text.TextField;
 
 	/**
-	 * View controlada por DefaultScenarioController.
+	 * @author Ibs
 	 */
 	public class DefaultScenarioView extends MovieClip {
+			
+		private var defaultScenarioController : DefaultScenarioController;	
 		
-		private var defaultScenarioController : DefaultScenarioController;
 		public var wavesView : WavesView;
 		public var pauseButton : MovieClip;
 		public var crn : ChronometerView;
 		public var scoreView : CurrentScoreView;
 		public var ammuView : AmmunitionView;
-		public var label : TextField;
-		public var pauseMenuView : PauseMenuView = new PauseMenuView();
-		private var finalScoreView : FinalScoreView;
+		//public var label : TextField;
+		public var pauseMenuView : PauseMenuView;
+		public var finalScoreView : FinalScoreView;
 		
-
+		
 		public function DefaultScenarioView() {
-			defaultScenarioController = new DefaultScenarioController();
-			defaultScenarioController.getView(this);
-			
+			pauseMenuView = new PauseMenuView();
+			defaultScenarioController = new DefaultScenarioController(this);
 			setEventListeners(pauseButton);
 			startGame();
 		}
 
-		private function setEventListeners(mc : MovieClip) : void {
-			
-			defaultScenarioController.setEventListeners(mc);
+		public function setEventLister(mc:MovieClip):void{
+			defaultScenarioController.setEventListener(mc);
 		}
-
-		private function startGame() : void {
+		
+		public function startGame() : void {
 			defaultScenarioController.startGame();         
 		}
+		
+		private function setEventListeners(mc : MovieClip) : void {
+			defaultScenarioController.setEventListener(mc);
+		}
+		
+		public function showFinalScoreView():void{
+			defaultScenarioController.showFinalScoreView();
+		}
+		
 	}
 }

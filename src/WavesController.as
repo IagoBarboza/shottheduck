@@ -1,5 +1,4 @@
 package {
-	import flash.events.MouseEvent;
 	import com.greensock.TweenLite;
 
 	/**

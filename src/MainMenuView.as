@@ -1,28 +1,26 @@
-﻿package {
+package {
 	import flash.display.MovieClip;
 
-	/*
-	 * View controlada por MainMenuController.
+	/**
+	 * @author Ibs
 	 */
 	public class MainMenuView extends MovieClip {
+		public var mainMenuController : MainMenuController;
 		public var newGameButton : MovieClip;
 		public var recordsButton : MovieClip;
-		private var mainMenuController : MainMenuController;
 
 		public function MainMenuView() {
 			this.x = 512;
 			this.y = 300;
 
 			mainMenuController = new MainMenuController(this);
-			// mainMenuController.getView(this);
+
 			setEventListener(newGameButton);
-			// setEventListener(resumeGameButton);
-			// setEventListener(recordsButton);
-			// setEventListener(quitButton);
+			setEventListener(recordsButton);
 		}
 
-		public function setEventListener(button : MovieClip) : void {
-			mainMenuController.setEventListener(button);
+		private function setEventListener(mc : MovieClip) : void {
+			mainMenuController.setEventListener(mc);
 		}
 	}
 }

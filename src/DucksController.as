@@ -4,16 +4,6 @@ package {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 
-	/**
-	 * Controlador dos patos.
-	 * O construtor DucksController recebe uma referência de DucksView.
-	 * O método onAnimation é responsável pelo movimento horizontal dos patos.
-	 * O método showDuck é responsável por pegar um pato aleatório de view.ducksArray e movimentá-lo na vertical.
-	 * O método hideDuck trata de descer um pato quando acertado e colocar outro no lugar dele chamando showDuck.
-	 * O método randomNumber trata de escolher um número aleatório de 0 - 7, para escolha do pato no view.ducksArray.
-	 * O método setCurrentIndex trata de modificar o currentIndex para impedir que o mesmo pato seja adicionado por 
-	 * showDuck.
-	 */
 	public class DucksController extends Object {
 		public var view : DucksView;
 		private var currentIndex : int;
