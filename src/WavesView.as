@@ -30,9 +30,17 @@ package {
 		public function onDucksAnimation() : void {
 			wavesController.onDucksAnimation();
 		}
-		
-		public function ducksShooted() : int{
+
+		public function ducksShooted() : int {
 			return wavesController.ducksShooted();
+		}
+
+		public function removeEventListeners() : void {
+			wavesController.removeEventListeners();
+		}
+		
+		public function reloadEventListeners() : void  {
+			wavesController.reloadEventListeners();
 		}
 	}
 }

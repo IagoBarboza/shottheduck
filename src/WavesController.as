@@ -1,4 +1,5 @@
 package {
+	import flash.events.MouseEvent;
 	import com.greensock.TweenLite;
 
 	/**
@@ -44,6 +45,19 @@ package {
 		public function ducksShooted() : int{
 			return view.ducksView1.ducksShooted()+view.ducksView2.ducksShooted()+view.ducksView3.ducksShooted();
 			
+		}
+
+		public function removeEventListeners() : void {
+			view.ducksView1.removeEventListeners();
+			view.ducksView2.removeEventListeners();
+			view.ducksView3.removeEventListeners();
+		}
+
+		public function reloadEventListeners() : void {
+			
+			view.ducksView1.reloadEventListeners();
+			view.ducksView2.reloadEventListeners();
+			view.ducksView3.reloadEventListeners();
 		}
 	}
 }

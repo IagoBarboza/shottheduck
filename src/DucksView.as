@@ -51,9 +51,17 @@ package {
 			// adciona os event listeners de MouseClick dos patos
 			ducksController.setEventListeners(duck);
 		}
-		
-		public function ducksShooted () : int{
+
+		public function ducksShooted() : int {
 			return ducksController.ducksShooted();
+		}
+
+		public function removeEventListeners() : void {
+			ducksController.removeEventListeners();
+		}
+		
+		public function reloadEventListeners() : void {
+			ducksController.reloadEventListeners();
 		}
 	}
 }

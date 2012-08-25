@@ -20,7 +20,7 @@ package {
 		private const DUCKSARRAYLOWINDEX : int = 0;
 		private const DUCKSARRAYHIGHINDEX : int = 7;
 		private var update : Boolean;
-		private var ducksShootedAux : int=0;
+		private var ducksShootedAux : int = 0;
 
 		public function DucksController(view : DucksView) {
 			this.view = view;
@@ -53,7 +53,6 @@ package {
 			TweenLite.to(e.currentTarget, 1, {y:0, onComplete:showDuck});
 			setCurrentIndex(e);
 			ducksShootedAux++;
-			
 		}
 
 		public function setEventListeners(duck : MovieClip) : void {
@@ -67,8 +66,8 @@ package {
 		public function onUpdate() : void {
 			update = true;
 		}
-		
-		public function ducksShooted():int{
+
+		public function ducksShooted() : int {
 			return ducksShootedAux;
 		}
 
@@ -99,6 +98,28 @@ package {
 					currentIndex = 7;
 					break;
 			}
+		}
+
+		public function removeEventListeners() : void {
+			view.duck1.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck2.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck3.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck4.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck5.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck6.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck7.removeEventListener(MouseEvent.CLICK, hideDuck);
+			view.duck8.removeEventListener(MouseEvent.CLICK, hideDuck);
+		}
+
+		public function reloadEventListeners() : void {
+			setEventListeners(view.duck1);
+			setEventListeners(view.duck2);
+			setEventListeners(view.duck3);
+			setEventListeners(view.duck4);
+			setEventListeners(view.duck5);
+			setEventListeners(view.duck6);
+			setEventListeners(view.duck7);
+			setEventListeners(view.duck8);
 		}
 	}
 }

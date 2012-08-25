@@ -1,5 +1,4 @@
 package {
-	import flash.text.TextField;
 	import flash.display.MovieClip;
 	import flash.events.AccelerometerEvent;
 	import flash.events.Event;
@@ -12,11 +11,10 @@ package {
 	 * O método getView é necessário para obter a referência da View.
 	 * O método startGame() chama startUpdate() que é o método responsável pelo início das animações.
 	 */
-	// Iago, preciso revisar esse código com você. Ok?
+	
 	public class DefaultScenarioController extends Object {
 		public var view : DefaultScenarioView;
 		public var acc : Accelerometer = new Accelerometer();
-		// public var scoreField :TextField;
 		var lastShake : Number = 0;
 		var shakeWait : Number = 500;
 
@@ -39,8 +37,10 @@ package {
 		}
 
 		public function setEventListeners(button : MovieClip) : void {
-			view.pauseMenuView.pauseMenuController.addEventListener("onPlayButton", unPauseGame);
-			view.pauseMenuView.pauseMenuController.addEventListener("onExitButton", onMainMenu);
+			
+			// listeners dos eventos do pause menu
+			view.pauseMenuView.addEventListener("onPlayButton",unPauseGame);
+			view.pauseMenuView.addEventListener("onExitButton", onMainMenu);
 
 			// listener dos eventos de click no stage
 			view.addEventListener(MouseEvent.CLICK, onShoot);
@@ -155,9 +155,17 @@ package {
 
 		public function onShoot(e : MouseEvent) : void {
 			// diminui a quantidade de balas
-			view.ammu.shooted();
-			updateScore();
-
+			try{
+				view.ammuView.shooted();
+				trace(view.ammuView.getCurrentAmmu());
+				updateScore();
+			}catch(e : NoAmmunition)
+			{
+				trace("no ammu");
+				view.removeEventListener(MouseEvent.CLICK, onShoot);
+				view.wavesView.removeEventListeners();
+			}
+			
 		}
 
 		private function updateScore() : void {
@@ -167,8 +175,9 @@ package {
 		}
 
 		function onReload() : void {
-			// aumenta a quantidade de balas
-			view.ammu.reload();
+			view.addEventListener(MouseEvent.CLICK, onShoot);
+			view.wavesView.reloadEventListeners();
+			view.ammuView.reload();
 		}
 	}
 }

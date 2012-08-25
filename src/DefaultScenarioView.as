@@ -11,10 +11,11 @@
 		public var wavesView : WavesView;
 		public var pauseButton : MovieClip;
 		public var crn : ChronometerView;
-		public var scoreView : ScoreView;
-		public var ammu : Ammunition;
+		public var scoreView : CurrentScoreView;
+		public var ammuView : AmmunitionView;
 		public var label : TextField;
 		public var pauseMenuView : PauseMenuView = new PauseMenuView();
+		private var finalScoreView : FinalScoreView;
 		
 
 		public function DefaultScenarioView() {
